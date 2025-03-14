@@ -1,0 +1,29 @@
+# Development files
+node_modules/
+.git/
+.github/
+.vscode/
+.idea/
+*.log
+*.tgz
+
+# Test files
+test/
+coverage/
+.nyc_output/
+
+# Example files (not needed in the published package)
+example/
+
+# Documentation source files
+docs/source/
+jsdoc.json
+
+# CI/CD files
+.travis.yml
+.gitlab-ci.yml
+.github/workflows/
+
+# Editor and OS files
+.DS_Store
+Thumbs.db

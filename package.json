@@ -1,0 +1,21 @@
+{
+  "name": "sonnylabs-node",
+  "version": "0.1.0",
+  "description": "Node.js client for the SonnyLabs Security API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "sonnylabs",
+    "security",
+    "ai",
+    "prompt-injection",
+    "pii"
+  ],
+  "author": "SonnyLabs <liana@sonnylabs.ai>",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.27.2"
+  }
+}
