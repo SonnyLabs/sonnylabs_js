@@ -31,7 +31,7 @@ async function analyzeUserInput(userInput) {
   
   // Check for prompt injections
   const injectionResult = client.getPromptInjections(result);
-  if (injectionResult && injectionResult.score > 0.7) {
+  if (injectionResult && injectionResult.score > 0.65) {
     console.log(`Potential prompt injection detected with score ${injectionResult.score}`);
     return {
       safe: false,
