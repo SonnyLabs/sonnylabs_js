@@ -17,9 +17,9 @@ async function analyzeUserInput(userInput) {
     
     const result = await client.analyzeText(userInput, 'input');
     
-    // Check for prompt injections
-    const injectionResult = client.getPromptInjections(result);
-    if (injectionResult && injectionResult.score > 0.65) {
+    // Check for prompt injections using the isPromptInjection method
+    if (client.isPromptInjection(result)) {
+      const injectionResult = client.getPromptInjections(result);
       console.log(`⚠️ Potential prompt injection detected (score: ${injectionResult.score.toFixed(2)})`);
       return {
         safe: false,
@@ -57,12 +57,13 @@ async function analyzeUserInput(userInput) {
   }
 }
 
-// Example function to analyze AI output
-async function analyzeAIResponse(aiResponse) {
+// Example function to analyze AI response
+async function analyzeAIResponse(aiResponse, linkedRequestTag = null) {
   try {
     console.log('Analyzing AI output...');
     
-    const result = await client.analyzeText(aiResponse, 'output');
+    // Use the linkedRequestTag if provided, to link the response to its request
+    const result = await client.analyzeText(aiResponse, 'output', linkedRequestTag);
     
     // Process result as needed for output validation
     console.log(`Analysis complete with tag: ${result.tag}`);

@@ -7,7 +7,7 @@ const { SonnyLabsClient } = require('../index');
 // Example configuration for SonnyLabs client
 const sonnyLabsClient = new SonnyLabsClient({
   apiToken: process.env.SONNYLABS_API_TOKEN || 'your-api-token',
-  baseUrl: process.env.SONNYLABS_BASE_URL || 'https://api.sonnylabs.ai',
+  baseUrl: process.env.SONNYLABS_BASE_URL || 'https://sonnylabs-service.onrender.com',
   analysisId: process.env.SONNYLABS_ANALYSIS_ID || 'your-analysis-id'
 });
 
@@ -37,9 +37,8 @@ app.post('/api/chat', async (req, res) => {
     const analysisResult = await sonnyLabsClient.analyzeText(message, 'input');
     
     // Step 2: Check for prompt injections
-    const injectionResult = sonnyLabsClient.getPromptInjections(analysisResult);
-    if (injectionResult && injectionResult.score > 0.7) {
-      console.log(`[${conversationId}] Prompt injection detected (score: ${injectionResult.score.toFixed(2)})`);
+    if (sonnyLabsClient.isPromptInjection(analysisResult)) {
+      console.log(`[${conversationId}] Prompt injection detected`);
       return res.status(403).json({
         error: 'Security check failed',
         message: 'Your input contains potentially harmful content.'
@@ -63,7 +62,8 @@ app.post('/api/chat', async (req, res) => {
     
     // Step 5: Analyze AI output with SonnyLabs
     console.log(`[${conversationId}] Analyzing AI output with SonnyLabs...`);
-    const outputAnalysisResult = await sonnyLabsClient.analyzeText(aiResponse, 'output');
+    // Reuse the tag from input analysis to link them in the dashboard
+    const outputAnalysisResult = await sonnyLabsClient.analyzeText(aiResponse, 'output', analysisResult.tag);
     
     // If AI output analysis identifies issues, you could modify the response here
     // For this example, we'll just proceed with the original response

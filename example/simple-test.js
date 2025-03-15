@@ -30,6 +30,10 @@ async function testAnalysis(text, type = 'input') {
       if (injectionResult) {
         console.log('\nPrompt injection check:');
         console.log(JSON.stringify(injectionResult, null, 2));
+        
+        // Use the new isPromptInjection method
+        const isInjection = client.isPromptInjection(result);
+        console.log(`Is prompt injection detected? ${isInjection ? 'Yes' : 'No'}`);
       } else {
         console.log('\nNo prompt injection detected.');
       }
