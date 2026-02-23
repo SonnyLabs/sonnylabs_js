@@ -16,6 +16,7 @@ yarn.lock
 /build
 /coverage
 .nyc_output
+/test/
 
 # Logs
 logs
