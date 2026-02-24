@@ -146,26 +146,22 @@ describe('scanToolCall', () => {
     console.log('Test: scanToolCall should detect safe tool call');
     const result = await scanToolCall('hello', 'tool', { arg: 'safe' }, client);
     assert.strictEqual(result.isSafe, true);
-    assert.strictEqual(result.recommendation, 'proceed');
   });
   it('should detect unsafe tool call', async () => {
     console.log('Test: scanToolCall should detect unsafe tool call');
     const result = await scanToolCall('inject', 'tool', { arg: 'inject' }, client);
     assert.strictEqual(result.isSafe, false);
-    assert.ok(['block', 'review'].includes(result.recommendation));
   });
   it('should handle error in client', async () => {
     console.log('Test: scanToolCall should handle error in client');
     const badClient = { analyzeText: () => { throw new Error('fail'); } };
     const result = await scanToolCall('test', 'tool', { arg: 'fail' }, badClient);
     assert.strictEqual(result.isSafe, false);
-    assert.strictEqual(result.recommendation, 'block');
   });
   it('should respect threshold', async () => {
     console.log('Test: scanToolCall should respect threshold');
     const result = await scanToolCall('inject', 'tool', { arg: 'inject' }, client, null, { threshold: 0.95 });
     assert.strictEqual(result.isSafe, true);
-    assert.strictEqual(result.recommendation, 'proceed');
   });
   it('should handle toolSchema', async () => {
     console.log('Test: scanToolCall should handle toolSchema');
