@@ -31,5 +31,4 @@ jobs:
           node-version: 24 # Use latest LTS for best OIDC support
           registry-url: https://registry.npmjs.org/
       - run: npm ci
-      # Notice: No secret env variable needed!
       - run: npm publish --provenance
