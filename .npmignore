@@ -6,6 +6,7 @@ node_modules/
 .idea/
 *.log
 *.tgz
+.env
 
 # Test files
 test/
