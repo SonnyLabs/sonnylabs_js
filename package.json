@@ -1,5 +1,5 @@
 {
-  "name": "sonnylabs-node",
+  "name": "sonnylabs-nodejs",
   "version": "0.1.0",
   "description": "Node.js client for the SonnyLabs Security API",
   "main": "index.js",
