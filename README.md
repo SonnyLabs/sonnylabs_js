@@ -63,10 +63,10 @@ The SonnyLabs REST API provides a way to detect prompt injections and PII in rea
 ```
 
 ## Installation
-The package will soon be available on NPM, but you can now install it on your system directly from GitHub:
+The package is available on NPM:
 
 ```bash
-npm install git+https://github.com/SonnyLabs/sonnylabs_js
+npm install sonnylabs-nodejs
 ```
 
 Alternatively, you can clone the repository and install locally:
